@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import quan.dev.data.dao.DatabaseDao;
 import quan.dev.data.dao.UserDao;
@@ -39,6 +40,7 @@ public class RegiterServlet extends BaseServlet {
            User user = userDao.find(email);
            
            if (user != null){
+               HttpSession session= request.getSession();
                session.setAttribute("error","Email existed");
                request.getRequestDispatcher("register.jsp").forward(request, response);
            }else {
